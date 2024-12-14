@@ -1,26 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
-import BookingForm from './BookingForm';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-
-  const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About' },
-    { path: '/services', label: 'Services' },
-    { path: '/gallery', label: 'Gallery' },
-    { path: '/contact', label: 'Contact' }
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -28,109 +17,283 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    setIsOpen(false);
-  }, [location]);
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isOpen]);
+
+  const navLinks = [
+    { path: '/', label: 'Home' },
+    { path: '/about', label: 'About' },
+    { path: '/services', label: 'Services' },
+    { path: '/gallery', label: 'Gallery' },
+    { path: '/contact', label: 'Contact' }
+  ];
+
+  const menuVariants = {
+    closed: {
+      scale: 0,
+      opacity: 0,
+      transition: {
+        duration: 0.2
+      }
+    },
+    open: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.4
+      }
+    }
+  };
+
+  const linkVariants = {
+    closed: {
+      opacity: 0,
+      y: 50,
+      transition: {
+        duration: 0.2
+      }
+    },
+    open: i => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        delay: i * 0.1
+      }
+    })
+  };
+
+  const Path = props => (
+    <motion.path
+      fill="transparent"
+      strokeWidth="3"
+      stroke={isOpen ? "white" : "currentColor"}
+      strokeLinecap="round"
+      {...props}
+    />
+  );
+
+  const MenuButton = () => (
+    <motion.button
+      className="relative z-50 h-12 w-12 rounded-full bg-transparent p-2"
+      onClick={() => setIsOpen(!isOpen)}
+      animate={isOpen ? "open" : "closed"}
+    >
+      <svg width="32" height="32" viewBox="0 0 32 32">
+        {/* Scissors - top line */}
+        <motion.g
+          variants={{
+            closed: { rotate: 0, x: 0 },
+            open: { rotate: 45, x: 2 }
+          }}
+        >
+          <Path
+            variants={{
+              closed: { d: "M 6 8 C 8 8, 10 8, 14 8" },
+              open: { d: "M 6 8 L 14 16" }
+            }}
+            strokeWidth="2"
+          />
+          <motion.circle
+            cx="15"
+            cy="8"
+            r="1.5"
+            fill="currentColor"
+            variants={{
+              closed: { scale: 1 },
+              open: { scale: 0 }
+            }}
+          />
+        </motion.g>
+
+        {/* Comb - middle line */}
+        <motion.g
+          variants={{
+            closed: { opacity: 1, x: 0 },
+            open: { opacity: 0, x: 20 }
+          }}
+        >
+          <Path
+            d="M 6 16 L 20 16"
+            strokeWidth="2"
+          />
+          <motion.path
+            d="M 12 14 L 12 18 M 14 14 L 14 18 M 16 14 L 16 18"
+            strokeWidth="1.5"
+            variants={{
+              closed: { opacity: 1 },
+              open: { opacity: 0 }
+            }}
+          />
+        </motion.g>
+
+        {/* Brush - bottom line */}
+        <motion.g
+          variants={{
+            closed: { rotate: 0, x: 0 },
+            open: { rotate: -45, x: 2 }
+          }}
+        >
+          <Path
+            variants={{
+              closed: { d: "M 6 24 C 8 24, 10 24, 14 24" },
+              open: { d: "M 6 24 L 14 16" }
+            }}
+            strokeWidth="2"
+          />
+          <motion.path
+            d="M 15 23 C 17 23, 18 25, 18 26"
+            strokeWidth="1.5"
+            variants={{
+              closed: { opacity: 1 },
+              open: { opacity: 0 }
+            }}
+          />
+          <motion.circle
+            cx="19"
+            cy="26"
+            r="2"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            variants={{
+              closed: { scale: 1 },
+              open: { scale: 0 }
+            }}
+          />
+        </motion.g>
+
+        {/* Sparkles when menu opens */}
+        <motion.g
+          variants={{
+            closed: { scale: 0, opacity: 0 },
+            open: { scale: 1, opacity: 1 }
+          }}
+          transition={{ delay: 0.2 }}
+        >
+          <motion.path
+            d="M 22 8 L 24 8 M 23 7 L 23 9"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+          <motion.path
+            d="M 26 20 L 28 20 M 27 19 L 27 21"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+          <motion.path
+            d="M 22 28 L 24 28 M 23 27 L 23 29"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+        </motion.g>
+      </svg>
+    </motion.button>
+  );
 
   return (
-    <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
-        }`}
-      >
-        <div className="container mx-auto px-4">
-          <div className="flex h-20 items-center justify-between">
-            {/* Logo */}
-            <Link to="/" className="text-2xl font-bold text-gray-900">
-              LAVANYA SALON
-            </Link>
+    <nav
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+        scrolled ? 'bg-white shadow-lg' : 'bg-transparent'
+      }`}
+    >
+      <div className="container mx-auto px-4">
+        <div className="flex h-20 items-center justify-between">
+          {/* Logo */}
+          <Link 
+            to="/"
+            className="text-2xl font-playfair font-bold text-pink-600"
+          >
+            Lavanya
+          </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden items-center space-x-8 md:flex">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`relative font-medium transition-colors ${
-                    location.pathname === item.path
-                      ? 'text-pink-500'
-                      : 'text-gray-600 hover:text-pink-500'
-                  }`}
-                >
-                  {item.label}
-                  {location.pathname === item.path && (
-                    <motion.div
-                      layoutId="navbar-indicator"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-pink-500"
-                      transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                    />
-                  )}
-                </Link>
-              ))}
-              <button
-                onClick={() => setIsBookingOpen(true)}
-                className="rounded-full bg-pink-500 px-6 py-2 font-medium text-white transition-colors hover:bg-pink-600"
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex md:items-center md:space-x-8">
+            {navLinks.map(({ path, label }) => (
+              <Link
+                key={path}
+                to={path}
+                className={`relative font-medium transition-colors duration-300 ${
+                  location.pathname === path
+                    ? 'text-pink-600'
+                    : 'text-gray-700 hover:text-pink-600'
+                }`}
               >
-                Book Now
-              </button>
-            </div>
+                {label}
+                {location.pathname === path && (
+                  <motion.div
+                    layoutId="underline"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-pink-600"
+                  />
+                )}
+              </Link>
+            ))}
+          </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              className="rounded-lg p-2 text-gray-600 hover:bg-gray-100 md:hidden"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <MenuButton />
           </div>
         </div>
+      </div>
 
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isOpen && (
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 bg-black"
+          >
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="border-t border-gray-200 bg-white md:hidden"
+              variants={menuVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-pink-500 to-purple-600"
             >
-              <div className="container mx-auto space-y-1 px-4 py-4">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className={`block rounded-lg px-4 py-2 text-base font-medium ${
-                      location.pathname === item.path
-                        ? 'bg-pink-50 text-pink-500'
-                        : 'text-gray-600 hover:bg-gray-50'
-                    }`}
+              <div className="flex flex-col items-center space-y-8">
+                {navLinks.map(({ path, label }, i) => (
+                  <motion.div
+                    key={path}
+                    custom={i}
+                    variants={linkVariants}
+                    initial="closed"
+                    animate="open"
+                    exit="closed"
                   >
-                    {item.label}
-                  </Link>
+                    <Link
+                      to={path}
+                      onClick={() => setIsOpen(false)}
+                      className={`relative text-3xl font-playfair font-medium text-white transition-colors duration-300 hover:text-pink-200 ${
+                        location.pathname === path && 'text-pink-200'
+                      }`}
+                    >
+                      {label}
+                      {location.pathname === path && (
+                        <motion.div
+                          layoutId="mobile-underline"
+                          className="absolute -bottom-2 left-0 right-0 h-0.5 bg-pink-200"
+                        />
+                      )}
+                    </Link>
+                  </motion.div>
                 ))}
-                <button
-                  onClick={() => {
-                    setIsBookingOpen(true);
-                    setIsOpen(false);
-                  }}
-                  className="mt-4 block w-full rounded-lg bg-pink-500 px-4 py-2 text-center font-medium text-white hover:bg-pink-600"
-                >
-                  Book Now
-                </button>
               </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.nav>
-
-      {/* Booking Form Modal */}
-      <BookingForm
-        isOpen={isBookingOpen}
-        onClose={() => setIsBookingOpen(false)}
-      />
-    </>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 };
 

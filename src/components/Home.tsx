@@ -761,51 +761,45 @@ const Home = () => {
         </div>
       </section>
 
-            {/* Why Choose Us Section */}
-            <section className="py-20">
+   {/* Why Choose Us Section */}
+   <section className="bg-white py-20">
         <div className="container mx-auto px-4">
-          <motion.div
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-16 text-center"
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center font-playfair text-3xl font-bold text-gray-900 sm:text-4xl"
           >
-            <h2 className="mb-4 font-playfair text-4xl font-bold text-gray-900">
-              Why Choose Us
-            </h2>
-            <p className="mx-auto max-w-2xl text-gray-600">
-              We pride ourselves on delivering exceptional service and creating unforgettable experiences for our clients.
-            </p>
-          </motion.div>
-
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 hover-3d">
+            Why Choose Us
+          </motion.h2>
+          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((feature, index) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.5 }}
-                className={`rounded-xl bg-white p-6 text-center shadow-lg transition-all duration-300 hover:shadow-xl ${index % 2 === 0 ? 'bg-pink-50' : 'bg-purple-50'}`}
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 20px 30px rgba(0, 0, 0, 0.1)",
+                  y: -10
+                }}
+                className="group relative overflow-hidden rounded-2xl bg-white p-6 transition-all duration-300 hover:bg-gradient-to-br hover:from-pink-50 hover:to-purple-50"
               >
-                <div className="transform transition-transform duration-300 tilt">
-                  <img
-                    src={
-                      feature.title === 'Expert Stylists'
-                        ? 'https://images.unsplash.com/photo-1657563920440-0ac6d8932f20?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-                        : feature.title === 'Flexible Hours'
-                        ? 'https://images.unsplash.com/photo-1533749047139-189de3cf06d3?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-                        : feature.title === 'Premium Products'
-                        ? 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=1915&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-                        : 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-                    }
-                    alt={feature.title}
-                    className="mb-4 h-32 w-full object-cover rounded-lg smooth-image"
-                  />
-                  <h3 className="mb-2 font-playfair text-xl font-bold transition-colors duration-300 hover:text-pink-600">
+                <div className="absolute -right-4 -top-4 h-24 w-24 rotate-12 transform bg-gradient-to-br from-pink-100 to-purple-100 opacity-0 transition-all duration-300 group-hover:opacity-100" />
+                <div className="relative">
+                  <span className="mb-4 inline-block rounded-lg bg-pink-100 p-3 text-pink-600 transition-all duration-300 group-hover:bg-pink-200 group-hover:text-pink-700">
+                    {feature.icon}
+                  </span>
+                  <h3 className="mb-3 font-playfair text-xl font-semibold text-gray-900">
                     {feature.title}
                   </h3>
                   <p className="text-gray-600">{feature.description}</p>
+                  <motion.div
+                    className="mt-4 h-1 w-0 bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-300 group-hover:w-16"
+                    whileHover={{ width: "100%" }}
+                  />
                 </div>
               </motion.div>
             ))}
