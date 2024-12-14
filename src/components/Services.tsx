@@ -4,10 +4,6 @@ import { Scissors, Clock, DollarSign, ArrowRight } from 'lucide-react';
 import BookingForm from './BookingForm';
 import ServiceDetails from './ServiceDetails';
 import Footer from './Footer';
-import hairtreamnet from '../assets/services/hair treatment.webp';
-import hairstyling from '../assets/services/hair.webp';
-import bridal from '../assets/services/bride.webp';
-import party from '../assets/services/party.jpg';
 
 const Services = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
@@ -40,60 +36,121 @@ const Services = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
-  const services = [
+  const serviceCategories = [
     {
-      id: 1,
-      name: 'Haircut & Styling',
-      description: 'Expert haircuts and styling for any occasion',
-      price: '₹999',
-      duration: '60 min',
-      image: hairstyling,
-      category: 'Hair'
+      id: "bridal",
+      title: "Bridal Services",
+      description: "Make your special day even more beautiful with our comprehensive bridal packages",
+      services: [
+        {
+          id: 1,
+          name: "Complete Bridal Package",
+          description: "Full bridal makeup, hairstyling, and pre-bridal services",
+          price: "₹25,999",
+          duration: "240 min",
+          image: "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+        },
+        {
+          id: 2,
+          name: "Pre-Bridal Package",
+          description: "Facials, threading, waxing, and beauty treatments",
+          price: "₹15,999",
+          duration: "180 min",
+          image: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+        }
+      ]
     },
     {
-      id: 2,
-      name: 'Hair Coloring',
-      description: 'Global color, highlights, or balayage',
-      price: '₹2,499',
-      duration: '120 min',
-      image: hairtreamnet,
-      category: 'Hair'
+      id: "hair",
+      title: "Hair Services",
+      description: "Transform your look with our premium hair styling and treatment services",
+      services: [
+        {
+          id: 3,
+          name: "Global Hair Color",
+          description: "Professional hair coloring with premium products",
+          price: "₹3,999",
+          duration: "120 min",
+          image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+        },
+        {
+          id: 4,
+          name: "Keratin Treatment",
+          description: "Advanced smoothing treatment for frizz-free hair",
+          price: "₹8,999",
+          duration: "180 min",
+          image: "https://images.unsplash.com/photo-1526045478516-99145907023c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+        }
+      ]
     },
     {
-      id: 3,
-      name: 'Bridal Package',
-      description: 'Complete bridal makeup & hairstyling',
-      price: '₹15,999',
-      duration: '180 min',
-      image: bridal,
-      category: 'Special'
+      id: "makeup",
+      title: "Makeup Services",
+      description: "Expert makeup services for every occasion",
+      services: [
+        {
+          id: 5,
+          name: "Party Makeup",
+          description: "Glamorous makeup for special occasions",
+          price: "₹2,999",
+          duration: "60 min",
+          image: "https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+        },
+        {
+          id: 6,
+          name: "HD Makeup",
+          description: "Long-lasting makeup with airbrush technique",
+          price: "₹4,999",
+          duration: "90 min",
+          image: "https://images.unsplash.com/photo-1560869713-da86a9ec0744?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+        }
+      ]
     },
     {
-      id: 4,
-      name: 'Party Makeup',
-      description: 'Glamorous makeup for special occasions',
-      price: '₹2,999',
-      duration: '45 min',
-      image: party,
-      category: 'Makeup'
+      id: "skin",
+      title: "Skin Treatments",
+      description: "Advanced skincare solutions for radiant, healthy skin",
+      services: [
+        {
+          id: 7,
+          name: "Signature Facial",
+          description: "Customized facial treatment for your skin type",
+          price: "₹2,499",
+          duration: "60 min",
+          image: "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+        },
+        {
+          id: 8,
+          name: "Anti-Aging Treatment",
+          description: "Advanced treatment to reduce fine lines and wrinkles",
+          price: "₹5,999",
+          duration: "90 min",
+          image: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+        }
+      ]
     },
     {
-      id: 5,
-      name: 'Hair Spa Treatment',
-      description: 'Luxury hair spa with keratin treatment',
-      price: '₹1,999',
-      duration: '90 min',
-      image: hairtreamnet,
-      category: 'Hair'
-    },
-    {
-      id: 6,
-      name: 'Menicure & Pedicure',
-      description: 'Luxury nail care with massage',
-      price: '₹1,499',
-      duration: '75 min',
-      image: 'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=800&q=80',
-      category: 'Nails'
+      id: "spa",
+      title: "Spa & Wellness",
+      description: "Rejuvenating spa treatments for complete relaxation",
+      services: [
+        {
+          id: 9,
+          name: "Aromatherapy Massage",
+          description: "Relaxing massage with essential oils",
+          price: "₹2,999",
+          duration: "60 min",
+          image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+        },
+        {
+          id: 10,
+          name: "Body Polishing",
+          description: "Full body exfoliation and moisturizing treatment",
+          price: "₹4,499",
+          duration: "90 min",
+          image: "https://images.unsplash.com/photo-1526045478516-99145907023c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
+        }
+      ]
     }
   ];
 
@@ -203,11 +260,17 @@ const Services = () => {
         }}
       >
         <div className="container mx-auto px-4">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <ServiceCard key={service.id} service={service} />
-            ))}
-          </div>
+          {serviceCategories.map((category) => (
+            <div key={category.id} className="mb-12">
+              <h2 className="font-playfair text-3xl font-bold tracking-wide">{category.title}</h2>
+              <p className="mt-2 text-lg text-gray-600/90">{category.description}</p>
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {category.services.map((service) => (
+                  <ServiceCard key={service.id} service={service} />
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </motion.section>
 

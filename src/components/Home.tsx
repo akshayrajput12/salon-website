@@ -193,58 +193,140 @@ const Home = () => {
     }
   };
 
+  const heroContent = {
+    title: "Lavanya Beauty Salon & Spa",
+    subtitle: "Where Beauty Meets Elegance",
+    description: "Experience the perfect blend of traditional beauty practices and modern techniques at Lavanya Salon. Our expert team delivers exceptional services tailored to enhance your natural beauty.",
+    cta: "Book Appointment"
+  };
+
   const features = [
     {
       icon: <Scissors className="h-8 w-8" />,
       title: "Expert Stylists",
-      description: "Our team of certified professionals brings years of experience"
-    },
-    {
-      icon: <Clock className="h-8 w-8" />,
-      title: "Flexible Hours",
-      description: "Open 7 days a week with extended evening hours"
+      description: "Our team of certified professionals brings years of experience in latest beauty trends and techniques."
     },
     {
       icon: <Award className="h-8 w-8" />,
       title: "Premium Products",
-      description: "Using only the highest quality beauty products"
+      description: "We use only the finest quality beauty products from renowned international brands."
     },
     {
-      icon: <Users className="h-8 w-8" />,
+      icon: <Star className="h-8 w-8" />,
       title: "Personalized Care",
-      description: "Tailored services to match your unique style"
+      description: "Every service is customized to match your unique style and beauty requirements."
+    },
+    {
+      icon: <Heart className="h-8 w-8" />,
+      title: "Relaxing Atmosphere",
+      description: "Step into our peaceful sanctuary designed for your complete relaxation and rejuvenation."
     }
   ];
 
-  const featuredServices = [
+  const testimonials = [
+    {
+      name: "Priya Sharma",
+      role: "Regular Client",
+      image: "https://images.unsplash.com/photo-1557555187-23d685287bc3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+      quote: "Lavanya Salon has been my go-to place for all beauty services. Their attention to detail and professional approach is commendable."
+    },
+    {
+      name: "Anjali Patel",
+      role: "Bridal Client",
+      image: "https://images.unsplash.com/photo-1592621385612-4d7129426394?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+      quote: "My bridal makeup was absolutely stunning! The team made me feel so special and beautiful on my big day."
+    },
+    {
+      name: "Meera Reddy",
+      role: "Regular Client",
+      image: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+      quote: "The spa services at Lavanya are exceptional. It's my perfect retreat for relaxation and self-care."
+    }
+  ];
+
+  const stats = [
+    { number: "10+", label: "Years of Excellence" },
+    { number: "15K+", label: "Happy Clients" },
+    { number: "50+", label: "Expert Stylists" },
+    { number: "100+", label: "Beauty Services" }
+  ];
+
+  const galleryItems = [
     {
       id: 1,
-      name: 'Bridal Package',
-      description: 'Complete bridal makeup & hairstyling',
-      price: '₹15,999',
-      duration: '180 min',
-      image: 'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=800&q=80',
-      category: 'Special'
+      type: 'images',
+      images: [
+        a1,
+        a2,
+        a3,
+        a4,
+        a5
+      ],
+      title: "Bridal Makeup",
+      description: "Beautiful hair styling and makeup results"
     },
     {
       id: 2,
-      name: 'Hair Coloring',
-      description: 'Global color, highlights, or balayage',
-      price: '₹2,499',
-      duration: '120 min',
-      image: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80',
-      category: 'Hair'
+      type: 'images',
+      images: [
+        b1,
+        b2,
+        b3,
+        b4,
+        b5
+      ],
+      title: "Color Transformations",
+      description: "Beautiful hair coloring results"
     },
     {
       id: 3,
-      name: 'Party Makeup',
-      description: 'Glamorous makeup for special occasions',
-      price: '₹2,999',
-      duration: '45 min',
-      image: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80',
-      category: 'Makeup'
+      type: 'images',
+      images: [
+        c1,
+        c2,
+        c3
+      ],
+      title: "Bride Makeup",
+      description: "Beautiful bride makeup results"
+    },
+    {
+      id: 4,
+      type: 'images',
+      images: [
+        e1,
+        e2
+      ],
+      title: "Modern Styling",
+      description: "Elegant and trendy styling"
+    },
+    {
+      id: 5,
+      type: 'images',
+      images: [
+        f1,
+        f2,
+        f3,
+        f4
+      ],
+      title: "Bride Styling",
+      description: "Glamorous bride styling"
+    },
+    {
+      id: 6,
+      type: 'images',
+      images: [
+        d1,
+        d2,
+        d3
+      ],
+      title: "Special Occasions",
+      description: "Glamorous event styling"
     }
   ];
+
+  const heroY = useTransform(scrollY, [0, 300], [0, 150]);
+  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const heroScale = useTransform(scrollY, [0, 300], [1, 0.8]);
 
   const ServiceCard = ({ service }) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -336,7 +418,35 @@ const Home = () => {
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            {featuredServices.map((service) => (
+            {[
+              {
+                id: 1,
+                name: 'Bridal Package',
+                description: 'Complete bridal makeup & hairstyling',
+                price: '₹15,999',
+                duration: '180 min',
+                image: 'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=800&q=80',
+                category: 'Special'
+              },
+              {
+                id: 2,
+                name: 'Hair Coloring',
+                description: 'Global color, highlights, or balayage',
+                price: '₹2,499',
+                duration: '120 min',
+                image: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80',
+                category: 'Hair'
+              },
+              {
+                id: 3,
+                name: 'Party Makeup',
+                description: 'Glamorous makeup for special occasions',
+                price: '₹2,999',
+                duration: '45 min',
+                image: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80',
+                category: 'Makeup'
+              }
+            ].map((service) => (
               <ServiceCard key={service.id} service={service} />
             ))}
           </div>
@@ -353,183 +463,6 @@ const Home = () => {
       </section>
     );
   };
-
-  const testimonials = [
-    {
-      name: "Priya Sharma",
-      role: "Regular Client",
-      image: "https://api.dicebear.com/7.x/adventurer/svg?seed=priya&backgroundColor=pink",
-      quote: "Best salon experience in the city! Their bridal package made me look absolutely stunning on my wedding day."
-    },
-    {
-      name: "Anjali Patel",
-      role: "Bridal Client",
-      image: "https://api.dicebear.com/7.x/adventurer/svg?seed=anjali&backgroundColor=purple",
-      quote: "The attention to detail in their makeup and hair styling is exceptional. Highly recommend their services!"
-    },
-    {
-      name: "Deepika Reddy",
-      role: "Regular Client",
-      image: "https://api.dicebear.com/7.x/adventurer/svg?seed=deepika&backgroundColor=pink",
-      quote: "Their hair spa treatment is divine! My hair feels so much healthier and more manageable now."
-    },
-    {
-      name: "Riya Malhotra",
-      role: "Fashion Influencer",
-      image: "https://api.dicebear.com/7.x/adventurer/svg?seed=riya&backgroundColor=purple",
-      quote: "Amazing party makeup! They always know exactly how to achieve the look I want."
-    },
-    {
-      name: "Neha Gupta",
-      role: "Corporate Professional",
-      image: "https://api.dicebear.com/7.x/adventurer/svg?seed=neha&backgroundColor=pink",
-      quote: "Perfect for professional styling! Their haircuts are always on point and last long."
-    },
-    {
-      name: "Meera Kapoor",
-      role: "Celebrity Client",
-      image: "https://api.dicebear.com/7.x/adventurer/svg?seed=meera&backgroundColor=purple",
-      quote: "The team is incredibly skilled and professional. My go-to salon for all special occasions!"
-    },
-    {
-      name: "Kavita Singh",
-      role: "Wedding Client",
-      image: "https://api.dicebear.com/7.x/adventurer/svg?seed=kavita&backgroundColor=pink",
-      quote: "Their bridal services are exceptional! They made my entire family look gorgeous for the wedding."
-    },
-    {
-      name: "Aisha Khan",
-      role: "Beauty Blogger",
-      image: "https://api.dicebear.com/7.x/adventurer/svg?seed=aisha&backgroundColor=purple",
-      quote: "Love their trendy hair coloring techniques! They stay updated with the latest styles."
-    },
-    {
-      name: "Sanya Mehta",
-      role: "Model",
-      image: "https://api.dicebear.com/7.x/adventurer/svg?seed=sanya&backgroundColor=pink",
-      quote: "The best hair treatments in town! My photoshoots always turn out perfect after their styling."
-    },
-    {
-      name: "Ritika Verma",
-      role: "Regular Client",
-      image: "https://api.dicebear.com/7.x/adventurer/svg?seed=ritika&backgroundColor=purple",
-      quote: "Their keratin treatment transformed my frizzy hair completely. Absolutely worth it!"
-    },
-    {
-      name: "Zara Syed",
-      role: "Fashion Designer",
-      image: "https://api.dicebear.com/7.x/adventurer/svg?seed=zara&backgroundColor=pink",
-      quote: "Incredible attention to detail in their styling. Perfect for fashion events!"
-    },
-    {
-      name: "Pooja Iyer",
-      role: "Makeup Enthusiast",
-      image: "https://api.dicebear.com/7.x/adventurer/svg?seed=pooja&backgroundColor=purple",
-      quote: "Their party makeup services are outstanding. Always get compliments after visiting them."
-    },
-    {
-      name: "Divya Nair",
-      role: "TV Artist",
-      image: "https://api.dicebear.com/7.x/adventurer/svg?seed=divya&backgroundColor=pink",
-      quote: "Perfect for my TV appearances! They understand exactly what works for the camera."
-    },
-    {
-      name: "Ananya Desai",
-      role: "Bride-to-be",
-      image: "https://api.dicebear.com/7.x/adventurer/svg?seed=ananya&backgroundColor=purple",
-      quote: "Had my bridal trial here and I'm already in love with their work! Can't wait for my wedding day."
-    },
-    {
-      name: "Lakshmi Rao",
-      role: "Business Owner",
-      image: "https://api.dicebear.com/7.x/adventurer/svg?seed=lakshmi&backgroundColor=pink",
-      quote: "Their professional styling helps me maintain a polished look for my business meetings."
-    }
-  ];
-
-  const stats = [
-    { number: "10+", label: "Years Experience" },
-    { number: "15k+", label: "Happy Clients" },
-    { number: "50+", label: "Expert Stylists" },
-    { number: "100%", label: "Satisfaction" }
-  ];
-
-  const galleryItems = [
-    {
-      id: 1,
-      type: 'images',
-      images: [
-        a1,
-        a2,
-        a3,
-        a4,
-        a5
-      ],
-      title: "very elegant makeup",
-      description: "Beautiful hair styling and makeup results"
-    },
-    {
-      id: 2,
-      type: 'images',
-      images: [
-        b1,
-        b2,
-        b3,
-        b4,
-        b5
-      ],
-      title: "Color Transformations",
-      description: "Beautiful hair coloring results"
-    },
-    {
-      id: 3,
-      type: 'images',
-      images: [
-        c1,
-        c2,
-        c3
-      ],
-      title: "bride makeup",
-      description: "beautiful bride makeup results"
-    },
-    {
-      id: 4,
-      type: 'images',
-      images: [
-        e1,
-        e2
-      ],
-      title: "Modern styling",
-      description: "Elegant and trendy styling"
-    },
-    {
-      id: 5,
-      type: 'images',
-      images: [
-        f1,
-        f2,
-        f3,
-        f4
-      ],
-      title: "bride styling",
-      description: "Glamorous bride styling"
-    },
-    {
-      id: 6,
-      type: 'images',
-      images: [
-        d1,
-        d2,
-        d3
-      ],
-      title: "Special Occasions",
-      description: "Glamorous event styling"
-    }
-  ];
-
-  const heroY = useTransform(scrollY, [0, 300], [0, 150]);
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
-  const heroScale = useTransform(scrollY, [0, 300], [1, 0.8]);
 
   const TestimonialsSection = () => {
     const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -616,7 +549,7 @@ const Home = () => {
                       <div className={`mb-6 flex flex-col items-center ${index === 1 ? 'transform translate-z-10' : ''}`}>
                         <div className="relative mb-4">
                           <img
-                            src={`https://api.dicebear.com/7.x/micah/svg?seed=${testimonial.name}&backgroundColor=${index === 1 ? 'rose' : index % 2 === 0 ? 'pink' : 'purple'}&baseColor=apricot&mouth=smile`}
+                            src={testimonial.image}
                             alt={testimonial.name}
                             className={`rounded-full border-4 ${
                               index === 1 
@@ -747,7 +680,7 @@ const Home = () => {
             className="max-w-4xl"
           >
             <AnimatedText
-              text="Elevate Your Beauty"
+              text={heroContent.title}
               className="font-playfair text-5xl font-bold text-white md:text-7xl"
             />
             
@@ -758,7 +691,7 @@ const Home = () => {
               transition={{ delay: 0.5, duration: 0.8 }}
               className="mx-auto mt-6 max-w-2xl text-lg text-white/90"
             >
-              Experience luxury beauty services tailored to enhance your natural radiance
+              {heroContent.description}
             </motion.p>
 
             <motion.div
@@ -773,7 +706,7 @@ const Home = () => {
                 className="group relative inline-flex items-center justify-center overflow-hidden rounded-lg bg-rose-500 px-8 py-3 font-semibold text-white transition-all duration-300 hover:bg-rose-600"
               >
                 <span className="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 transform bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-40"></span>
-                Book Appointment
+                {heroContent.cta}
               </button>
               <Link
                 to="/services"
@@ -905,7 +838,7 @@ const Home = () => {
           </motion.div>
 
           <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {galleryItems.map((item, index) => (
+            {galleryItems.slice(0, 6).map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.8, rotateX: -15 }}
@@ -994,6 +927,39 @@ const Home = () => {
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mt-12 text-center"
+          >
+            <Link to="/gallery">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="
+                  px-8 py-3 rounded-full font-medium text-white
+                  bg-gradient-to-r from-pink-500 to-pink-600
+                  transform transition-all duration-300
+                  hover:shadow-lg
+                  flex items-center justify-center gap-2 mx-auto
+                "
+              >
+                <span>View All Gallery</span>
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ 
+                    duration: 1.5, 
+                    repeat: Infinity,
+                    ease: "easeInOut" 
+                  }}
+                >
+                  →
+                </motion.span>
+              </motion.button>
+            </Link>
+          </motion.div>
         </div>
       </motion.section>
 

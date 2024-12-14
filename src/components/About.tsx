@@ -5,18 +5,21 @@ import Footer from './Footer';
 
 // Journey Images from Unsplash
 const journeyImages = {
-  start: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&auto=format&fit=crop&q=60",
-  growth: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=60",
-  innovation: "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=800&auto=format&fit=crop&q=60",
-  excellence: "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=800&auto=format&fit=crop&q=60",
-  today: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=800&auto=format&fit=crop&q=60"
+  start: "https://images.unsplash.com/photo-1560869713-da86a9ec0744?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+  growth: "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+  innovation: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+  excellence: "https://images.unsplash.com/photo-1526045478516-99145907023c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+  today: "https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
 };
 
 // Team Member Images
 const teamImages = {
-  stylist1: "https://images.unsplash.com/photo-1595502124338-950db27ea1c7?w=800&auto=format&fit=crop&q=60",
-  stylist2: "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=800&auto=format&fit=crop&q=60",
-  stylist3: "https://images.unsplash.com/photo-1554519934-e32b1629d9ee?w=800&auto=format&fit=crop&q=60"
+  stylist1: "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+  stylist2: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+  stylist3: "https://images.unsplash.com/photo-1526045478516-99145907023c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+  stylist4: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+  stylist5: "https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+  stylist6: "https://images.unsplash.com/photo-1560869713-da86a9ec0744?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
 };
 
 const About = () => {
@@ -126,64 +129,92 @@ const About = () => {
   const journeyMilestones = [
     {
       year: "2018",
-      title: "A Dream Takes Shape",
-      description: "Started our journey with a boutique salon focused on personalized beauty experiences",
+      title: "The Beginning",
+      description: "Lavanya Beauty Salon opened its doors, bringing expert beauty services to the community.",
       image: journeyImages.start
     },
     {
       year: "2019",
-      title: "Expanding Horizons",
-      description: "Added advanced hair treatments and expanded our team of certified stylists",
+      title: "Expanding Services",
+      description: "Introduced advanced skincare treatments and expanded our team of certified professionals.",
       image: journeyImages.growth
     },
     {
       year: "2020",
-      title: "Digital Innovation",
-      description: "Introduced online booking and virtual consultations to better serve our clients",
+      title: "Digital Transformation",
+      description: "Launched online booking system and virtual consultations for client convenience.",
       image: journeyImages.innovation
     },
     {
-      year: "2022",
-      title: "Award-Winning Excellence",
-      description: "Recognized as the Best Luxury Salon by City Style Awards",
+      year: "2021",
+      title: "Premium Partnership",
+      description: "Partnered with leading beauty brands to offer exclusive treatments and products.",
       image: journeyImages.excellence
     },
     {
+      year: "2022",
+      title: "Award Recognition",
+      description: "Received 'Best Luxury Salon' award for exceptional service and client satisfaction.",
+      image: journeyImages.today
+    },
+    {
       year: "2023",
-      title: "Setting New Standards",
-      description: "Expanded to a new location with state-of-the-art facilities and services",
+      title: "Innovation & Growth",
+      description: "Introduced AI-powered skin analysis and expanded to multiple locations.",
       image: journeyImages.today
     }
   ];
 
   const teamMembers = [
     {
-      name: "Sarah Johnson",
-      role: "Master Stylist & Creative Director",
-      specialties: ["Hair Coloring", "Bridal Styling"],
-      experience: "15+ years",
+      name: "Lavanya Sharma",
+      role: "Founder & Master Stylist",
+      specialties: ["Bridal Makeup", "Hair Styling", "Advanced Color Techniques"],
+      experience: "15+ Years",
       image: teamImages.stylist1
     },
     {
-      name: "Michael Chen",
-      role: "Advanced Color Specialist",
-      specialties: ["Balayage", "Color Correction"],
-      experience: "10+ years",
+      name: "Priya Patel",
+      role: "Senior Makeup Artist",
+      specialties: ["HD Makeup", "Airbrush Techniques", "Celebrity Styling"],
+      experience: "10+ Years",
       image: teamImages.stylist2
     },
     {
-      name: "Emma Rodriguez",
-      role: "Texture & Treatment Expert",
-      specialties: ["Keratin Treatments", "Curly Hair"],
-      experience: "8+ years",
+      name: "Anjali Reddy",
+      role: "Skincare Specialist",
+      specialties: ["Advanced Facials", "Chemical Peels", "Anti-aging Treatments"],
+      experience: "8+ Years",
       image: teamImages.stylist3
+    },
+    {
+      name: "Meera Kapoor",
+      role: "Hair Expert",
+      specialties: ["Hair Treatments", "Global Coloring", "Keratin Services"],
+      experience: "12+ Years",
+      image: teamImages.stylist4
+    },
+    {
+      name: "Ritu Verma",
+      role: "Nail Art Specialist",
+      specialties: ["Gel Extensions", "3D Nail Art", "Luxury Manicures"],
+      experience: "7+ Years",
+      image: teamImages.stylist5
+    },
+    {
+      name: "Deepa Singh",
+      role: "Spa Therapist",
+      specialties: ["Body Treatments", "Aromatherapy", "Hot Stone Massage"],
+      experience: "9+ Years",
+      image: teamImages.stylist6
     }
   ];
 
   const achievements = [
-    { number: "15+", label: "Expert Stylists" },
-    { number: "5000+", label: "Happy Clients" },
-    { number: "25+", label: "Industry Awards" }
+    { number: "10K+", label: "Happy Clients" },
+    { number: "50+", label: "Expert Staff" },
+    { number: "15+", label: "Beauty Awards" },
+    { number: "100%", label: "Client Satisfaction" }
   ];
 
   return (

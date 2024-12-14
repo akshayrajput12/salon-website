@@ -109,6 +109,9 @@ const GalleryCard = ({ item, onClick }) => {
 const Gallery = () => {
   const [selectedGalleryItem, setSelectedGalleryItem] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [visibleItems, setVisibleItems] = useState<number>(6);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [hasMore, setHasMore] = useState<boolean>(true);
 
   const handleNext = () => {
     if (selectedGalleryItem && selectedGalleryItem.type === 'images') {
@@ -124,6 +127,19 @@ const Gallery = () => {
         prev === 0 ? selectedGalleryItem.images.length - 1 : prev - 1
       );
     }
+  };
+
+  const loadMoreItems = () => {
+    setIsLoading(true);
+    // Simulate API call delay
+    setTimeout(() => {
+      setVisibleItems(prev => prev + 6);
+      // Assuming we have a total of 18 items
+      if (visibleItems + 6 >= galleryItems.length) {
+        setHasMore(false);
+      }
+      setIsLoading(false);
+    }, 800);
   };
 
   const galleryItems = [
@@ -196,12 +212,12 @@ const Gallery = () => {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {galleryItems.map((item) => (
+            {galleryItems.slice(0, visibleItems).map((item) => (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: galleryItems.indexOf(item) * 0.1 }}
                 className="transform-gpu"
               >
                 <GalleryCard
@@ -216,6 +232,50 @@ const Gallery = () => {
           </div>
         </div>
       </section>
+
+      {/* Load More Button */}
+      {hasMore && (
+        <div className="mt-12 text-center">
+          <motion.button
+            onClick={loadMoreItems}
+            disabled={isLoading}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={`
+              relative px-8 py-3 rounded-full font-medium text-white
+              bg-gradient-to-r from-pink-500 to-pink-600
+              transform transition-all duration-300
+              hover:shadow-lg disabled:opacity-70
+              ${isLoading ? 'cursor-wait' : 'cursor-pointer'}
+            `}
+          >
+            <motion.span
+              animate={isLoading ? { opacity: 0 } : { opacity: 1 }}
+              transition={{ duration: 0.2 }}
+            >
+              Load More
+            </motion.span>
+            
+            {isLoading && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{
+                    duration: 1,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
+                  className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
+                />
+              </motion.div>
+            )}
+          </motion.button>
+        </div>
+      )}
 
       {/* Modal for viewing gallery items */}
       <AnimatePresence>
